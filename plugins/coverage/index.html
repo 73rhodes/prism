@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8" />
+<link rel="icon" href="favicon.png" />
+<title>Line highlight ▲ Prism plugins</title>
+<base href="../.." />
+<link rel="stylesheet" href="style.css" />
+<link rel="stylesheet" href="themes/prism.css" data-noprefix />
+<link rel="stylesheet" href="plugins/coverage/prism-coverage.css" data-noprefix />
+<link rel="stylesheet" href="plugins/line-numbers/prism-line-numbers.css" data-noprefix />
+<script src="scripts/prefixfree.min.js"></script>
+
+<script>var _gaq = [['_setAccount', 'UA-33746269-1'], ['_trackPageview']];</script>
+<script src="https://www.google-analytics.com/ga.js" async></script>
+</head>
+<body>
+
+<header data-plugin-header="coverage"></header>
+
+<section class="language-markup">
+	<h1>How to use</h1>
+
+	<p>This plugin is based on the line-highlight plugin and only works on code blocks (<code>&lt;pre>&lt;code></code>).
+		It allows you highlight code sections with different colors and attach an optional text annotation tooltip.
+
+	<p>Known issues: this plugin is known not to work with the COY theme due to background scrolling issues.</p>
+
+	<p>Specify the lines to be highlighted using the <code>data-coverage</code> attribute on the <code>&lt;pre></code>
+		element. The format is described below.</p>
+	<ul>
+		<li>The basic format is <code>class:range|text,range|text;...</code></li>
+		<li>The <code>class</code> can be one of <code>line-covered</code>, <code>line-uncovered</code>, or a custom CSS class.</li>
+	</ul>
+
+	<p>A <code>range</code> is specified as follows:
+	<ul>
+		<li>A single number refers to the line with that number</li>
+		<li>Ranges are denoted by two numbers, separated with a hyphen (-)</li>
+		<li>Multiple line numbers or ranges are separated by commas.</li>
+		<li>Whitespace is allowed anywhere and will be stripped off.</li>
+		<li>An optional tooltip message can be added as <code>|some text</code> at the end of a range.
+		</li>
+	</ul>
+
+	<p>Examples:</p>
+	<dl>
+		<dt>line-covered:5</dt>
+		<dd>Apply the <code>line-covered</code> style to the 5th line</dd>
+
+		<dt>1-5</dt>
+		<dd>Lines 1 through 5</dd>
+
+		<dt>1,4</dt>
+		<dd>Line 1 and line 4</dd>
+
+		<dt>1-2, 5, 9-20</dt>
+		<dd>Lines 1 through 2, line 5, lines 9 through 20</dd>
+	</dl>
+
+	<p>The same <code>data-line-offset</code> attribute used in the line-highlight plugin is supported.
+
+	<p>You can also link to specific lines on any code snippet, by using the following as a url hash: <code>#{element-id}.{lines}</code> where
+	<code>{element-id}</code> is the id of the <code>&lt;pre></code> element and <code>{lines}</code> is one or more lines or line ranges that follow the format
+	outlined above. For example, if there is an element with <code>id="play"</code> on the page, you can link to lines 5-6 by linking to <a href="plugins/coverage/#play.3-12">#play.3-12</a></p>
+</section>
+
+<section>
+	<h1>Examples</h1>
+
+    <pre class="line-numbers language-verilog"
+        data-covered="line-uncovered:14-18|Statement not covered;line-covered:3-12|12x;"
+        data-src="plugins/coverage/verilog.sv" id="play"></pre>
+
+    <pre
+        data-covered="line-covered:15-25|foo bar"
+        data-src="plugins/coverage/verilog.sv" class="language-verilog"></pre>
+
+    <pre
+        data-covered="line-covered:1,3-4,42"
+        data-src="plugins/coverage/prism-coverage.js"></pre>
+
+</section>
+
+<script src="prism.js"></script>
+<script src="plugins/coverage/prism-coverage.js"></script>
+<script src="plugins/line-numbers/prism-line-numbers.js"></script>
+<script src="components/prism-verilog.js"></script>
+<script src="scripts/utopia.js"></script>
+<script src="components.js"></script>
+<script src="scripts/code.js"></script>
+
+</body>
+</html>
